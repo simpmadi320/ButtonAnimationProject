@@ -19,47 +19,53 @@ body{
     padding: .5em 1em;
     border-radius:  .3em;
     cursor: pointer;
+    font-size: 2rem;
 }
 
-.btn:hover {
-    animation: blink    500ms   ease-in-out infinite,
-               grow     1s      ease-in-out infinite;
+
+.btn-holder:hover::after{
+    --default-transform: translateY(500%);
+
+    content: 'Loading';
+    position: absolute;
+    transform: var(--default-transform);
+    left: 300px;
+    animation: loading 2s ease forwards;
 }
 
-.btn:focus{
-    animation: fly-away 500ms ease-in-out forwards;
-}
 
-@keyframes blink{
-    0%{
+
+@keyframes loading{
+    0% {
+        content: 'Loading.';
         opacity: 1;
     }
-    50% {
-        opacity: .75;
+    14% {
+        content: 'Loading..';
+    }
+    28% {
+        content: 'Loading...';
+        transform: var(--default-transform) rotate(30deg);
+    }
+    42% {
+        content: 'Loading..';
+    }
+    57% {
+        content: 'Loading.';
+        opacity: 0.6;
+    }
+    71% {
+        content: 'Loading..';
+    }
+    85% {
+        content: 'Loading...';
+        transform: var(--default-transform) rotate(-30deg);
     }
     100% {
-        opacity: 1
+        content: 'Loaded';
+        opacity: 0;
+        transform: var(--default-transform) rotate(0d);
+        
     }
 }
 
-
-@keyframes grow{
-    0%{
-        transform: scale(1);
-    }
-    50%{
-        transform: scale(1.1);
-    }
-    100%{
-        transform: scale(1);
-    }
-}
-
-@keyframes fly-away {
-    33%{
-        transform: translate(100px, 50px) rotate(30deg) scale(0.9);
-    }
-    100%{
-        transform: translate(-1000px, -75px) rotate(200deg) scale(0.25);
-    }
-}
